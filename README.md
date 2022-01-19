@@ -1,61 +1,17 @@
-# Project 2
-Breadth-first search
+! [BuildStatus] (https://github.com/seba2550/project2/actions/workflows/test.yml/badge.svg?event=push)
 
-# Assignment Overview
-The purpose of this assignment is to get you comfortable working with graph structures and to implement a breadth-first search function to traverse the graph and find the shortest path between nodes.
+# Project 2 (Breadth-first search)
 
-# Assignment Tasks
+This repository contains code for my implementation of the Breadth-First search (BFS) algorithm, along with some unit tests for the implementation. Briefly, the BFS algorithm is a traversing algorithm, wherein we start at a particular node and traverse the graph by layers, moving horizontally across these layers until we reach the end of the graph. The BFS algorithm has various real-world applications, including people searching in social networks, GPS navigation, and puzzle solving. 
+<br>
 
-## Coding Assessment
-* Write a breadth-first search function (Write this code in the graph.py file)
-	* If there's no end node, just return a list with the order of traversal
-	* If there is an end node and a path exists, return a list of the shortest path
-	* If there is an end node and a path does not exist, return None
+This implementation has three possible outcomes, depending on the inputs given. The first scenario involves a start node, an end node, and a path between the two. In this case, the method will return the shortest path between the start and end node. The second scenario involves a start node, but no end node. For this case, the method will return a list of traversed nodes, from the start node to the end of the graph after having visited all nodes. The last scenario involves a start node and end node, but no possible path between the two nodes. In this last scenario, the method returns None.
+<br>
 
-## Software Development Assessment
+I've included two unit tests for this implementation. Both are run on an example graph from [Rosalind](https://rosalind.info/problems/bfs/). 
 
-* Write unit tests (in the test_bfs.py file) for your breadth first search
-* Replace these instructions with a brief description of bfs in your forked repo
-	
-* Automate Testing with a [Github Actions](https://docs.github.com/en/actions)
+<br>
 
-	See blogposts below on helping set up github actions with pytest:
-	
-	* [post 1](https://blog.dennisokeeffe.com/blog/2021-08-08-pytest-with-github-actions)
-	* [post 2](https://mattsegal.dev/pytest-on-github-actions.html)
-	* Add "! [BuildStatus] (https://github.com/ < your-github-username > /Project2/workflows/Project2/badge.svg?event=push)" (update link and remove spaces) to the beginning of your readme file
-	* Also refer to previous assignment for more in-depth help with GitHub actions
+![Rosalind_BFS_Graph](https://user-images.githubusercontent.com/36509785/150235753-2fe9ce8e-be91-4d5a-834b-302cbd581cb5.jpg)
 
-	Ensure that the github actions complete the following:
-	* runs pytest
-
-# Getting Started
-To get started you will need to fork this repository onto your own github. You will then work on the code base from your own repo and make changes to it in the form of commits. 
-
-# Reference Information
-## Test Data
-Two networks have been provided in an adjacency list format readable by [networkx](https://networkx.org/), is a commonly used python package for working with graph structures. These networks consist of two types of nodes:
-* Faculty nodes 
-* Pubmed ID nodes
-
-However, since these are both stored as strings, you can treat them as equivalent nodes when traversing the graph. The first graph ("citation_network.adjlist") has nodes consisting of all BMI faculty members, the top 100 Pubmed papers *cited by* faculty, and the top 100 papers that *cite* faculty publications. Edges are directed and and edge from node A -> B indicates that node A *is cited by* node B. There are 5120 nodes and 9247 edges in this network.
-
-The second network is a subgraph of the first, consisting of only the nodes and edges along the paths between the PIs of all your TAs. There are 30 nodes and 64 edges.
-
-# Completing the assignment
-Make sure to push all your code to github, ensure that your unit tests are correct, and submit a link to your github through the google classroom assignment.
-
-# Grading
-
-## Code (6 points)
-* Breadth-first traversal works correctly (3)
-* Traces the path from one faculty to another (2)
-* Handles boundary cases (1)
-
-## Unit tests (3 points)
-* Output traversal for mini data set (1.5)
-* Unit tests for cases that work and cases that don't (1.5)
-
-## Style (1 points)
-* Readable code with clear comments and method descriptions
-
+The first test checks that all nodes in the graph are traversed, regardless of order. The second test checks that all three of the scenarios described above are handled correctly (start + end + path; start + path; start + end + no path). Both tests were built and tested using pytest in this repository.
