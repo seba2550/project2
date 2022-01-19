@@ -2,7 +2,6 @@
 import pytest
 from search import graph
 
-@pytest.fixture
 def test_bfs_traversal():
     '''
     Unit test for breadth first traversal.
@@ -12,7 +11,7 @@ def test_bfs_traversal():
     G = graph.Graph("./data/Rosalind_Test_Data.adjlist")
     visited_nodes = G.bfs("2")
     data_nodes = ['2', '1', '4', '6', '3', '5'] # Nodes in the example graph from the Rosalind page
-    assert visited_nodes != data_nodes # Assert that the returned list contains all nodes
+    assert visited_nodes == data_nodes # Assert that the returned list contains all nodes
 
 
 def test_bfs():
