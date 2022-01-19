@@ -1,4 +1,5 @@
 import networkx as nx
+from collections import deque
 
 class Graph:
     """
@@ -21,30 +22,26 @@ class Graph:
         * If there is an end node and a path does not exist, return None
 
         """
-        visited_nodes = [] # List to keep track of the nodes we have visited already
-        queue = [] # List to use as a queue object for reading in nodes and their respective neighbors
-        backtrace = [] # List to keep track of our path
-        G = self.graph # Initialize the graph object
+        if start == end: # If the start and end node are the same, return that node
+            return [start]
+        visited = [start] # Initialize a list to keep track of nodes we've visited
+        queue = deque([(start, [])]) # Initialize a queue object to read in nodes and their neighbors. We also add the starting node to it 
 
-        queue.append(start) # Add the start node to our queue object 
-        visited_nodes.append(start) # Add the start node to our list of nodes we have visited
-
-        while queue: # This loop continues until the queue is empty
-            current_node = queue.pop(0) # Remove the leftmost element from the queue, and establish it as the node we are currently looking at
-
-            if current_node == end:
-                return backtrace # There is an end node and a path from start node to end node. Return the path between them
-
-            for neighbor in G[current_node]: # Iterate over the neighboring nodes of the node we are currently visiting
-                if neighbor not in visited_nodes: # If the neighboring node has not been visited, add it to our list of visited nodes. Also enqueue it and keep track of it in our path
-                    visited_nodes.append(neighbor)
-                    queue.append(neighbor)
-                    backtrace[neighbor] = current_node # Record the parent node for backtracing through the traversed path
-
-        if end is None: # There is no end node. Return the order of traversal
-            return backtrace 
-
-        return None # There is an end node, but no path between the start and end. Return None
+        while queue: # Keep going until the queue is empty (which is when we reach the end of the graph)
+            print(queue)
+            current_node, traversed_path = queue.popleft() # Remove the leftmost element from the queue, add it to the "current_node" variable for processing and track it in our path
+            visited.append(current_node) # Note that we have visited the current node
+            for neighbor in self.graph[current_node]: # Iterate over the neighboring nodes for the node we are currently visiting
+                if neighbor == end: # If the neighbor we are iterating over is the end node, we stop, return our path, the node we are in, and the end node
+                    return traversed_path + [current_node, neighbor]
+                if neighbor in visited: # If the neighbor we are iterating over has already been visited, we skip through it
+                    continue
+                queue.append((neighbor, traversed_path + [current_node])) # Stack the iterated node and the path used to reach it onto the queue
+                visited.append(neighbor) # Add the iterated node to our list of visited nodes
+        if end is None: # There is no specified end node, thus we return the traversed path from the start node to the end of the graph
+            return traversed_path
+        if None: # There is an end node, but there is no path between it and the start node. We return None
+            return None        
 
         
 
