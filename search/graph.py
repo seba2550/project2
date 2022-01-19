@@ -38,7 +38,9 @@ class Graph:
                 queue.append((neighbor, traversed_path + [current_node])) # Stack the iterated node and the path used to reach it onto the queue
                 visited.append(neighbor) # Add the iterated node to our list of visited nodes
         if end is None: # There is no specified end node, thus we return the traversed path from the start node to the end of the graph
-            return traversed_path
+            visited_no_dups = []
+            [visited_no_dups.append(x) for x in visited if x not in visited_no_dups]
+            return visited_no_dups
         if None: # There is an end node, but there is no path between it and the start node. We return None
             return None        
 
