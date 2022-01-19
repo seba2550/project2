@@ -28,7 +28,6 @@ class Graph:
         queue = deque([(start, [])]) # Initialize a queue object to read in nodes and their neighbors. We also add the starting node to it 
 
         while queue: # Keep going until the queue is empty (which is when we reach the end of the graph)
-            print(queue)
             current_node, traversed_path = queue.popleft() # Remove the leftmost element from the queue, add it to the "current_node" variable for processing and track it in our path
             visited.append(current_node) # Note that we have visited the current node
             for neighbor in self.graph[current_node]: # Iterate over the neighboring nodes for the node we are currently visiting
